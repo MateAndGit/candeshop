@@ -1,0 +1,23 @@
+# 1. 민감 정보 (절대 업로드 금지)
+.env
+*-secret.yml
+
+# 2. 백엔드 (Spring Boot) 관련 제외
+backend/.gradle/
+backend/build/
+backend/out/
+backend/bin/
+backend/.idea/
+backend/*.iml
+
+# 3. 프론트엔드 (React) 관련 제외
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+
+# 4. 공통 IDE 및 OS 설정
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
