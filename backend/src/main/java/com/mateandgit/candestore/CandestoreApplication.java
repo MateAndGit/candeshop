@@ -9,5 +9,4 @@ public class CandestoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CandestoreApplication.class, args);
 	}
-
 }

@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: candeshop_db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=candeshop
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend  # backend 폴더의 Dockerfile을 읽어서 빌드함
+    container_name: candeshop_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/candeshop?serverTimezone=UTC&characterEncoding=UTF-8
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - db # DB가 먼저 실행된 후 백엔드가 켜짐

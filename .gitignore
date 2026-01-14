@@ -21,3 +21,6 @@ frontend/.env.local
 *.iml
 .DS_Store
 Thumbs.db
+
+# 5. 데이터베이스 관련 제외 (필수!)
+mysql_data/
