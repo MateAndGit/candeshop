@@ -1,0 +1,12 @@
+.switch_text {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #888;
+}
+
+.switch_text span {
+  color: #ff8f00;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
