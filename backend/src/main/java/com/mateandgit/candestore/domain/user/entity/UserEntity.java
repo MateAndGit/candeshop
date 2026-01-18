@@ -47,10 +47,10 @@ public class UserEntity {
 
 
     @Builder
-    public UserEntity(String email, String username, String password) {
+    public UserEntity(String email, String username, String password, UserRole role) {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.role = USER;
+        this.role = role;
     }
 }

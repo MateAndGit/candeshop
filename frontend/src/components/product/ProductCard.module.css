@@ -1,0 +1,94 @@
+.product_card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+  border: 1px solid #f0f0f0;
+}
+.product_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.img_box {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  background-color: #fff3e0;
+}
+
+.info {
+  padding: 15px;
+  text-align: center;
+}
+.info h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #333;
+}
+.price {
+  font-size: 13px;
+  color: #ff8f00;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.info button {
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 20px;
+  background: #5d4037;
+  color: white;
+}
+.info button:hover {
+  background: #3e2723;
+}
+
+.img_box {
+  height: 150px;
+  background-color: #fff3e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  position: relative; /* 버튼 배치의 기준점 */
+  border-radius: 12px 12px 0 0;
+}
+
+/* 공통 관리자 버튼 스타일 */
+.admin_btn {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.admin_btn:hover {
+  transform: scale(1.1);
+}
+
+/* 수정(Update) 버튼 - 왼쪽 */
+.update {
+  left: 10px;
+  top: 10px;
+  background-color: #ffb74d; /* 주황색 계열 */
+}
+
+/* 삭제(Delete) 버튼 - 오른쪽 */
+.delete {
+  right: 10px;
+  top: 10px;
+  background-color: #ef5350; /* 빨간색 계열 */
+}

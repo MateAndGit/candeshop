@@ -1,7 +1,7 @@
 package com.mateandgit.candestore.domain.user.service;
 
 import com.mateandgit.candestore.domain.user.dto.CustomUserDetails;
-import com.mateandgit.candestore.domain.user.dto.UserJoinRequest;
+import com.mateandgit.candestore.domain.user.dto.JoinRequest;
 import com.mateandgit.candestore.domain.user.entity.UserEntity;
 import com.mateandgit.candestore.domain.user.entity.UserRole;
 import com.mateandgit.candestore.domain.user.repository.UserRepository;
@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.mateandgit.candestore.domain.user.entity.UserRole.USER;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -22,7 +24,7 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(UserJoinRequest joinRequest) {
+    public void join(JoinRequest joinRequest) {
 
         if (userRepository.existsByEmail(joinRequest.getEmail())) {
             throw new RuntimeException("Email already exists");
@@ -32,6 +34,7 @@ public class UserService implements UserDetailsService {
                 .email(joinRequest.getEmail())
                 .username(joinRequest.getUsername())
                 .password(passwordEncoder.encode(joinRequest.getPassword()))
+                .role(USER)
                 .build();
 
         userRepository.save(user);

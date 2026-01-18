@@ -12,7 +12,7 @@ const LoginForm = ({ onSwitchMode }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const naviagate = useNavigate();
+  const navagate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const LoginForm = ({ onSwitchMode }) => {
 
       const data = await res.json();
       localStorage.setItem("accessToken", data.accessToken);
-      naviagate("/profile");
+      navagate("/main");
       if (!res.ok) throw new Error("로그인 실패");
     } catch {
       setError("로그인 중 오류가 발생했습니다.");
