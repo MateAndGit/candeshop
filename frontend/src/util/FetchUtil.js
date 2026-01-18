@@ -27,7 +27,7 @@ export async function refreshAccessToken() {
 
 export async function fetchWithAccess(url, options = {}) {
   let accessToken = localStorage.getItem("accessToken");
-  console.log("🚀 [요청 시작] URL:", url);
+  console.log("[요청 시작] URL:", url);
 
   if (!options.headers) options.headers = {};
   options.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -40,14 +40,14 @@ export async function fetchWithAccess(url, options = {}) {
 
     try {
       accessToken = await refreshAccessToken();
-      console.log("✅ [갱신 성공] 새로운 Access Token으로 재요청을 보냅니다.");
+      console.log("[갱신 성공] 새로운 Access Token으로 재요청을 보냅니다.");
 
       options.headers["Authorization"] = `Bearer ${accessToken}`;
       response = await fetch(url, options);
-      console.log("🎉 [재요청 결과] 성공!");
+      console.log("[재요청 결과] 성공!");
     } catch (err) {
       console.error(
-        "❌ [갱신 실패] Refresh Token도 만료되었거나 오류가 발생했습니다.",
+        "[갱신 실패] Refresh Token도 만료되었거나 오류가 발생했습니다.",
       );
       localStorage.removeItem("accessToken");
       window.location.href = "/";

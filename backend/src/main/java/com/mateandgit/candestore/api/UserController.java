@@ -1,6 +1,6 @@
 package com.mateandgit.candestore.api;
 
-import com.mateandgit.candestore.domain.user.dto.UserJoinRequest;
+import com.mateandgit.candestore.domain.user.dto.JoinRequest;
 import com.mateandgit.candestore.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public ResponseEntity<String> join(@Valid @RequestBody UserJoinRequest joinRequest) {
+    public ResponseEntity<String> join(@Valid @RequestBody JoinRequest joinRequest) {
         userService.join(joinRequest);
         return ResponseEntity.ok("Join success");
     }

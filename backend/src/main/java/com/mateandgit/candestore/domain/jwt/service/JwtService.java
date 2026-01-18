@@ -20,8 +20,8 @@ public class JwtService {
     private final RefreshRepository refreshRepository;
 
     // Access token lives for 10 minutes
-//    private final long accessExpiration = 10 * 60 * 1000L;
-    private final long accessExpiration = 30 * 1000L;
+    private final long accessExpiration = 10 * 60 * 1000L;
+//    private final long accessExpiration = 30 * 1000L;
     // Refresh token lives for 24 hours
     private final long refreshExpiration = 24 * 60 * 60 * 1000L;
 //    private final long refreshExpiration = 2 * 60 * 1000L;

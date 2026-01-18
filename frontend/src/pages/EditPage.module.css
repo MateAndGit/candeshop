@@ -1,0 +1,103 @@
+.edit_container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #fff8e1;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.edit_container h2 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 24px;
+}
+
+.edit_form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 모든 입력 필드 공통 스타일 */
+.edit_form input,
+.edit_form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.edit_form textarea {
+  height: 150px;
+  resize: none; /* 크기 조절 방지 */
+}
+
+.edit_form input:focus,
+.edit_form textarea:focus {
+  border-color: #ffb74d; /* 해바라기 포인트 컬러 */
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(255, 183, 77, 0.2);
+}
+
+/* 버튼 그룹 */
+.btn_group {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 취소 버튼보다 완료 버튼을 강조 */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn_group button {
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+/* 취소 버튼 */
+.btn_group button[type="button"] {
+  background-color: #eee;
+  color: #666;
+}
+
+.btn_group button[type="button"]:hover {
+  background-color: #e0e0e0;
+}
+
+/* 수정 완료 버튼 */
+.submit_btn {
+  background-color: #5d4037; /* 기존 담기 버튼과 통일감 */
+  color: white;
+}
+
+.submit_btn:hover {
+  background-color: #3e2723;
+  transform: translateY(-2px);
+}
+
+/* 에러 메시지 */
+.error_msg {
+  color: #ef5350;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* 반응형 처리 */
+@media (max-width: 600px) {
+  .edit_container {
+    margin: 20px;
+    padding: 25px;
+  }
+}

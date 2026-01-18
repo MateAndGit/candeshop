@@ -68,8 +68,15 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
+                // 1. 비로그인 허용 (회원가입, 로그인 등)
                 .requestMatchers("/api/users/join", "/api/login", "/api/jwt/reissue").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+                // 2. 상품 조회 (GET) - 로그인한 사람이면 권한 상관없이 통과
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/products/**").authenticated()
+
+                // 3. 상품 관리 (CUD) - DB에 'ADMIN'이라고 적힌 유저만 가능
+                .requestMatchers("/api/products/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+                // 4. 나머지 모든 요청은 인증 필요
                 .anyRequest().authenticated());
 
         LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration));
