@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 @Getter
 public class ProductRequest {
 
@@ -12,5 +14,5 @@ public class ProductRequest {
     @NotBlank(message = "Description is required")
     private String description;
     @NotNull(message = "Price is required")
-    private int price;
+    private BigDecimal price;
 }
