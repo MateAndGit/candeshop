@@ -35,6 +35,29 @@ export default function ProductCard({ product, isAdmin }) {
     }
   };
 
+  const handleAddToCart = async () => {
+    try {
+      const response = await fetchWithAccess(
+        `${BACKEND_API_BASE_URL}/api/cart/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId: id, amount: 1 }),
+        },
+      );
+
+      if (response.ok) {
+        alert("장바구니에 담겼습니다! 🌻");
+        window.location.reload();
+      } else {
+        const errorMsg = await response.text();
+        alert(errorMsg);
+      }
+    } catch (err) {
+      console.error("장바구니 담기 실패:", err);
+    }
+  };
+
   return (
     <div className={styles.product_card}>
       <div className={styles.img_box}>
@@ -62,7 +85,9 @@ export default function ProductCard({ product, isAdmin }) {
         <h4>{title}</h4>
         <h5>{description}</h5>
         <p className={styles.price}>{price.toLocaleString()}원</p>
-        <button className={styles.cart_btn}>담기</button>
+        <button className={styles.cart_btn} onClick={handleAddToCart}>
+          담기
+        </button>
       </div>
     </div>
   );

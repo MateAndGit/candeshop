@@ -1,8 +1,10 @@
 package com.mateandgit.candestore.filter;
 
+import com.mateandgit.candestore.domain.user.dto.CustomUserDetails;
+import com.mateandgit.candestore.domain.user.entity.UserEntity;
+import com.mateandgit.candestore.domain.user.entity.UserRole;
 import com.mateandgit.candestore.util.JwtUtil;
-import io.jsonwebtoken.ExpiredJwtException; // Import for the specific exception
-import io.jsonwebtoken.SignatureException; // Optional: for other JWT exceptions
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,9 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -44,13 +45,22 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
 
-            String email = jwtUtil.getUsername(token); // Get username (email) from token
-            String role = jwtUtil.getRole(token); // Get role from token
+            String email = jwtUtil.getUsername(token);
+            String role = jwtUtil.getRole(token);
 
-            UserDetails userDetails = new User(email, "", Collections.singletonList(new SimpleGrantedAuthority(role)));
-            Authentication authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            UserEntity userEntity = UserEntity.builder()
+                    .email(email)
+                    .build();
+
+            CustomUserDetails userDetails = new CustomUserDetails(userEntity);
+
+            Authentication authToken = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    Collections.singletonList(new SimpleGrantedAuthority(role))
+            );
+
             SecurityContextHolder.getContext().setAuthentication(authToken);
-
         } catch (ExpiredJwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("{\"error\": \"Access token expired\"}");

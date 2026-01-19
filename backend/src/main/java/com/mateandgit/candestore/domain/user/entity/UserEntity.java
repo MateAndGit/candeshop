@@ -1,5 +1,6 @@
 package com.mateandgit.candestore.domain.user.entity;
 
+import com.mateandgit.candestore.domain.cartitem.entity.CartItem;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,8 +11,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-
-import static com.mateandgit.candestore.domain.user.entity.UserRole.USER;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -45,6 +46,8 @@ public class UserEntity {
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> itemList = new ArrayList<>();
 
     @Builder
     public UserEntity(String email, String username, String password, UserRole role) {
@@ -52,5 +55,6 @@ public class UserEntity {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.itemList = new ArrayList<>();
     }
 }

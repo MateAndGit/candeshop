@@ -27,11 +27,4 @@ public class UserController {
         return ResponseEntity.ok("Join success");
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<Map<String, String>> me(Authentication authentication) {
-        if (authentication == null) {
-            return ResponseEntity.status(401).build();
-        }
-        return ResponseEntity.ok(Map.of("user", authentication.getName()));
-    }
 }

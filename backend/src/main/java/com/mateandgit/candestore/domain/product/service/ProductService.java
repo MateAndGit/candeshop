@@ -19,7 +19,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Page<ProductResponse> getProductList(Pageable pageable) {
-        Page<Product> products = productRepository.findAllByOrderByCreatedDateDesc(pageable);
+        Page<Product> products = productRepository.findAll(pageable);
         return products.map(ProductResponse::new);
     }
 
