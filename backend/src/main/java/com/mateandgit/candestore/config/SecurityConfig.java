@@ -53,7 +53,7 @@ public class SecurityConfig {
             configuration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
         } else {
             // Default: localhost for development
-            configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+            configuration.setAllowedOrigins(List.of("https://candeshop.vercel.app"));
         }
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
