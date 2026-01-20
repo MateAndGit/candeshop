@@ -18,7 +18,7 @@ public class EmailService {
     @Async
     public void sendOrderConfirmation(String userEmail, Order order) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(userEmail); // 내 메일로 고정
+        message.setTo("sola201@naver.com"); // 내 메일로 고정
         message.setSubject("[Cande Store] 주문 입금 안내");
         message.setText("총 금액: " + order.getTotalPrice() + "원\n계좌: [아르헨티나 계좌]");
         mailSender.send(message);
