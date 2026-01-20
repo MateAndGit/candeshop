@@ -19,7 +19,6 @@ const RegisterForm = ({ onSwitchMode }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     setError("");
-    console.log("회원가입 시도:", { email, username, password });
     if (
       email.trim() === "" ||
       username.trim() === "" ||

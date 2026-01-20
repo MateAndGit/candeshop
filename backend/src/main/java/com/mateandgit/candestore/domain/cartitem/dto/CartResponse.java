@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 public record CartResponse (
         Long cartItemId,
+        Long productId,
         String title,
         BigDecimal price,
         Long amount
@@ -13,9 +14,10 @@ public record CartResponse (
     public CartResponse(CartItem cartItem) {
         this(
                 cartItem.getId(),
+                cartItem.getProduct().getId(),
                 cartItem.getProduct().getTitle(),
                 cartItem.getProduct().getPrice(),
                 cartItem.getAmount()
-                );
+        );
     }
 }

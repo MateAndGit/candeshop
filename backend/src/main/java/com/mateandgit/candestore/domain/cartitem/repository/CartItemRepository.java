@@ -20,4 +20,6 @@ public interface CartItemRepository extends JpaRepository<CartItem,Long> {
     BigDecimal getTotalCartPrice(@Param("user") UserEntity user);
 
     Optional<CartItem> findByUserAndProduct(UserEntity userEntity, Product product);
+
+    Optional<CartItem> deleteByUser(UserEntity userEntity);
 }
