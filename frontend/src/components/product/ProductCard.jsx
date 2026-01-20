@@ -16,7 +16,7 @@ export default function ProductCard({ product, isAdmin }) {
 
   const handleDelete = async (e) => {
     e.stopPropagation();
-    if (!window.confirm("이 상품을 정말 삭제할까요?")) return;
+    if (!window.confirm("¿Estás seguro de que quieres eliminar este producto?")) return;
     try {
       const response = await fetchWithAccess(
         `${import.meta.env.VITE_BACKEND_API_BASE_URL}/api/products/${id}`,
@@ -24,10 +24,10 @@ export default function ProductCard({ product, isAdmin }) {
       );
 
       if (response.ok) {
-        alert("삭제되었습니다.");
+        alert("Producto eliminado.");
         window.location.reload();
       } else {
-        alert("삭제 권한이 없거나 오류가 발생했습니다.");
+        alert("No tienes permisos para eliminar o ha ocurrido un error.");
       }
     } catch (err) {
       console.error("삭제 실패:", err);
@@ -46,7 +46,7 @@ export default function ProductCard({ product, isAdmin }) {
       );
 
       if (response.ok) {
-        alert("장바구니에 담겼습니다! 🌻");
+        alert("¡Agregado al carrito! 🌻");
         window.location.reload();
       } else {
         const errorMsg = await response.text();
@@ -54,7 +54,7 @@ export default function ProductCard({ product, isAdmin }) {
       }
     } catch (err) {
       if (import.meta.env.DEV) {
-        console.error("장바구니 담기 실패:", err);
+        console.error("Error al agregar al carrito:", err);
       }
     }
   };

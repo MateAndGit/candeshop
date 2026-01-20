@@ -14,14 +14,14 @@ export default function EditPage() {
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
 
-  // 1. 기존 상품 정보 불러오기
+  // 1. Cargar información del producto existente
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await fetchWithAccess(
           `${BACKEND_API_BASE_URL}/api/products/${id}`,
         );
-        if (!response.ok) throw new Error("상품 정보를 불러오지 못했습니다.");
+        if (!response.ok) throw new Error("No se pudo cargar la información del producto.");
 
         const data = await response.json();
         setTitle(data.title);
@@ -60,10 +60,10 @@ export default function EditPage() {
       );
 
       if (response.ok) {
-        alert("성공적으로 수정되었습니다.");
+        alert("Modificado exitosamente.");
         navigate("/main");
       } else {
-        throw new Error("수정에 실패했습니다.");
+        throw new Error("Error al modificar.");
       }
     } catch (err) {
       setError(err.message);
@@ -72,7 +72,7 @@ export default function EditPage() {
 
   return (
     <div className={styles.edit_container}>
-      <h2>상품 정보 수정 🌻</h2>
+      <h2>Modificar Información del Producto 🌻</h2>
       {error && <p className={styles.error_msg}>{error}</p>}
 
       <form onSubmit={handleEdit} className={styles.edit_form}>
@@ -80,12 +80,12 @@ export default function EditPage() {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="상품명"
+          placeholder="Nombre del producto"
         />
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="상품 설명"
+          placeholder="Descripción del producto"
         />
         <input
           type="number"

@@ -30,13 +30,13 @@ export default function Navbar() {
           { method: "GET" },
         );
 
-        if (!response.ok) throw new Error("장바구니 정보 불러오기 실패");
+        if (!response.ok) throw new Error("Error al cargar información del carrito");
 
         const data = await response.json();
         setCartCount(data.totalCount || 0);
       } catch (err) {
         if (import.meta.env.DEV) {
-          console.error("Cart fetch error:", err.message);
+          console.error("Error al obtener carrito:", err.message);
         }
       }
     };

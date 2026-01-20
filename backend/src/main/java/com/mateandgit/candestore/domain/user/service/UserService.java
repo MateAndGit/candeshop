@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
     public void join(JoinRequest joinRequest) {
 
         if (userRepository.existsByEmail(joinRequest.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new RuntimeException("El email ya existe");
         }
 
         UserEntity user = UserEntity.builder()
@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con email: " + email));
 
         return new CustomUserDetails(userEntity);
     }

@@ -37,7 +37,7 @@ export default function MainPage() {
           },
         );
 
-        if (!response.ok) throw new Error("상품 불러오기 실패");
+        if (!response.ok) throw new Error("Error al cargar productos");
 
         const data = await response.json();
         setProducts(data.content); // 실제 상품 리스트
@@ -45,7 +45,7 @@ export default function MainPage() {
       } catch (err) {
         setError(
           err === "인증 만료"
-            ? "세션이 만료되어 로그인 페이지로 이동합니다."
+            ? "Sesión expirada. Redirigiendo a la página de inicio de sesión."
             : err.message,
         );
       } finally {
@@ -65,14 +65,14 @@ export default function MainPage() {
           <p>가장 따뜻한 마음을 선물하세요</p>
         </div>
         <br />
-        <h3 className={styles.section_title}>추천 상품</h3>
+        <h3 className={styles.section_title}>Productos Recomendados</h3>
         {/* 관리자일 때만 등록 버튼 표시 */}
         {isAdmin && (
           <button
             className={styles.admin_add_btn}
             onClick={() => (window.location.href = "/product/new")}
           >
-            상품 등록
+            Registrar Producto
           </button>
         )}
         {isLoading ? (

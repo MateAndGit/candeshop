@@ -42,17 +42,17 @@ export default function AddPage() {
 
       // 3. 결과 처리
       if (response.ok) {
-        alert("상품이 성공적으로 등록되었습니다! 🌻");
+        alert("¡Producto registrado exitosamente! 🌻");
         navigate("/main"); // 등록 후 메인 페이지로 이동
       } else if (response.status === 403) {
         //에서 발생한 403 에러 대응
-        setError("등록 권한이 없습니다. 관리자 계정인지 확인해주세요.");
+        setError("No tienes permisos para registrar. Verifica si eres administrador.");
       } else {
         throw new Error("등록 중 서버 오류가 발생했습니다.");
       }
     } catch (err) {
       if (import.meta.env.DEV) {
-        console.error("등록 실패:", err);
+        console.error("Error al registrar:", err);
       }
       setError(err.message);
     }
@@ -60,13 +60,13 @@ export default function AddPage() {
 
   return (
     <div className={styles.edit_container}>
-      <h2>새 상품 등록 🌻</h2>
+      <h2>Registrar Nuevo Producto 🌻</h2>
 
       {error && <p className={styles.error_msg}>{error}</p>}
 
       <form onSubmit={handleAdd} className={styles.edit_form}>
         <div className={styles.input_group}>
-          <label>상품명</label>
+          <label>Nombre del Producto</label>
           <input
             type="text"
             value={title}
@@ -77,17 +77,17 @@ export default function AddPage() {
         </div>
 
         <div className={styles.input_group}>
-          <label>상품 설명</label>
+          <label>Descripción del Producto</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="상품에 대한 상세 설명을 입력하세요"
+            placeholder="Ingresa una descripción detallada del producto"
             required
           />
         </div>
 
         <div className={styles.input_group}>
-          <label>가격</label>
+          <label>Precio</label>
           <input
             type="number"
             value={price}
@@ -106,7 +106,7 @@ export default function AddPage() {
             취소
           </button>
           <button type="submit" className={styles.submit_btn}>
-            상품 등록하기
+            Registrar Producto
           </button>
         </div>
       </form>
