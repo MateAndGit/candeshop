@@ -3,9 +3,9 @@ spring:
     name: candestore
 
   datasource:
-    url: jdbc:mysql://mysql.railway.internal:3306/railway?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: UKCLSsnSkgPogEmRRIQoARAbPNdIuVlZ
+    url: ${MYSQL_URL:jdbc:mysql://mysql.railway.internal:3306/railway?serverTimezone=UTC&characterEncoding=UTF-8}
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:UKCLSsnSkgPogEmRRIQoARAbPNdIuVlZ}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
