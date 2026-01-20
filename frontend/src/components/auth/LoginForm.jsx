@@ -12,11 +12,10 @@ const LoginForm = ({ onSwitchMode }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navagate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("로그인 시도:", { email, password });
 
     if (email.trim() === "" || password.trim() === "") {
       setError("입력값을 다시 확인해주세요.");
@@ -31,10 +30,11 @@ const LoginForm = ({ onSwitchMode }) => {
         body: JSON.stringify({ email, password }),
       });
 
+      if (!res.ok) throw new Error("로그인 실패");
+
       const data = await res.json();
       localStorage.setItem("accessToken", data.accessToken);
-      navagate("/main");
-      if (!res.ok) throw new Error("로그인 실패");
+      navigate("/main");
     } catch {
       setError("로그인 중 오류가 발생했습니다.");
     }
@@ -55,7 +55,7 @@ const LoginForm = ({ onSwitchMode }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submint" name="로그인 하기" />
+        <Button type="submit" name="로그인 하기" />
       </form>
       <AuthSwitcher isLogin={true} onSwitchMode={onSwitchMode} />
       <br />

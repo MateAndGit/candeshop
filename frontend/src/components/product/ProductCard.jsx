@@ -11,7 +11,6 @@ export default function ProductCard({ product, isAdmin }) {
   // 수정/삭제 핸들러
   const handleEdit = (e) => {
     e.stopPropagation();
-    console.log(`수정 ID: ${id}`);
     navigate(`/product/edit/${id}`);
   };
 
@@ -54,7 +53,9 @@ export default function ProductCard({ product, isAdmin }) {
         alert(errorMsg);
       }
     } catch (err) {
-      console.error("장바구니 담기 실패:", err);
+      if (import.meta.env.DEV) {
+        console.error("장바구니 담기 실패:", err);
+      }
     }
   };
 

@@ -51,7 +51,9 @@ export default function AddPage() {
         throw new Error("등록 중 서버 오류가 발생했습니다.");
       }
     } catch (err) {
-      console.error("등록 실패:", err);
+      if (import.meta.env.DEV) {
+        console.error("등록 실패:", err);
+      }
       setError(err.message);
     }
   };

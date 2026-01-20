@@ -27,7 +27,9 @@ export async function refreshAccessToken() {
 
 export async function fetchWithAccess(url, options = {}) {
   let accessToken = localStorage.getItem("accessToken");
-  console.log("[요청 시작] URL:", url);
+  if (import.meta.env.DEV) {
+    console.log("[요청 시작] URL:", url);
+  }
 
   if (!options.headers) options.headers = {};
   options.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -36,19 +38,27 @@ export async function fetchWithAccess(url, options = {}) {
   let response = await fetch(url, options);
 
   if (response.status === 401) {
-    console.warn("⚠️ [401 발생] Access Token 만료됨. 갱신을 시도합니다...");
+    if (import.meta.env.DEV) {
+      console.warn("[401 발생] Access Token 만료됨. 갱신을 시도합니다...");
+    }
 
     try {
       accessToken = await refreshAccessToken();
-      console.log("[갱신 성공] 새로운 Access Token으로 재요청을 보냅니다.");
+      if (import.meta.env.DEV) {
+        console.log("[갱신 성공] 새로운 Access Token으로 재요청을 보냅니다.");
+      }
 
       options.headers["Authorization"] = `Bearer ${accessToken}`;
       response = await fetch(url, options);
-      console.log("[재요청 결과] 성공!");
+      if (import.meta.env.DEV) {
+        console.log("[재요청 결과] 성공!");
+      }
     } catch (err) {
-      console.error(
-        "[갱신 실패] Refresh Token도 만료되었거나 오류가 발생했습니다.",
-      );
+      if (import.meta.env.DEV) {
+        console.error(
+          "[갱신 실패] Refresh Token도 만료되었거나 오류가 발생했습니다.",
+        );
+      }
       localStorage.removeItem("accessToken");
       window.location.href = "/";
       return Promise.reject("인증 만료");

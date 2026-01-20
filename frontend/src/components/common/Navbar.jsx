@@ -33,10 +33,11 @@ export default function Navbar() {
         if (!response.ok) throw new Error("장바구니 정보 불러오기 실패");
 
         const data = await response.json();
-        console.log(data);
         setCartCount(data.totalCount || 0);
       } catch (err) {
-        console.error("Cart fetch error:", err.message);
+        if (import.meta.env.DEV) {
+          console.error("Cart fetch error:", err.message);
+        }
       }
     };
 
