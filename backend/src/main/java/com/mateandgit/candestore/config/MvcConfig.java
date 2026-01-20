@@ -9,13 +9,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
-
-        corsRegistry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowCredentials(true)
-                .allowedHeaders("*")
-                .exposedHeaders("Set-Cookie", "Authorization");
+        // CORS is handled by SecurityConfig's CorsConfigurationSource
+        // This method is kept for compatibility but actual CORS configuration
+        // is managed through SecurityConfig to support environment-based origins
     }
 
 }

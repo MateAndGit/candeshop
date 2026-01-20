@@ -47,7 +47,14 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Allow frontend
+        // Allow localhost for development and Vercel URL for production
+        String allowedOrigins = System.getenv("ALLOWED_ORIGINS");
+        if (allowedOrigins != null && !allowedOrigins.isEmpty()) {
+            configuration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
+        } else {
+            // Default: localhost for development
+            configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        }
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
