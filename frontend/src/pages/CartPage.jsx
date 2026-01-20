@@ -101,7 +101,7 @@ export default function CartPage() {
     }
   };
 
-  if (loading) return <div className={styles.loading}>로딩 중... 🌻</div>;
+  if (loading) return <div className={styles.loading}>Cargando... 🌻</div>;
 
   return (
     <div className={styles.container}>
@@ -114,7 +114,7 @@ export default function CartPage() {
               <div key={item.cartItemId} className={styles.cart_item}>
                 <div className={styles.item_info}>
                   <h4>{item.title}</h4>
-                  <p>{item.price.toLocaleString()}원</p>
+                  <p>${item.price.toLocaleString()}</p>
                 </div>
                 <button
                   className={styles.delete_btn}
