@@ -46,10 +46,10 @@ const RegisterForm = ({ onSwitchMode }) => {
           navigate("/");
         });
       } else {
-        throw new Error("Error en el registro");
+        throw new Error("회원가입 실패");
       }
     } catch {
-      setError("Ha ocurrido un error durante el registro.");
+      setError("회원가입 중 오류가 발생했습니다.");
     }
   };
 

@@ -11,7 +11,7 @@ export default function CartPage() {
 
   const navigate = useNavigate();
 
-  // 1. Obtener datos del carrito
+  // 1. 장바구니 데이터 가져오기
   const fetchCart = async () => {
     try {
       const response = await fetchWithAccess(
@@ -26,7 +26,7 @@ export default function CartPage() {
       }
     } catch (err) {
       if (import.meta.env.DEV) {
-          console.error("Error al cargar el carrito:", err);
+        console.error("장바구니 로딩 실패:", err);
       }
     } finally {
       setLoading(false);
@@ -37,9 +37,9 @@ export default function CartPage() {
     fetchCart();
   }, []);
 
-  // 2. Manejador de eliminación de items
+  // 2. 아이템 삭제 핸들러
   const handleDelete = async (itemId) => {
-    if (!window.confirm("¿Estás seguro de que quieres eliminar este artículo?")) return;
+    if (!window.confirm("삭제하시겠습니까?")) return;
     try {
       const response = await fetchWithAccess(
         `${BACKEND_API_BASE_URL}/api/cart/${itemId}`,
@@ -52,13 +52,13 @@ export default function CartPage() {
       }
     } catch (err) {
       if (import.meta.env.DEV) {
-        console.error("Error al eliminar:", err);
+        console.error("삭제 중 오류:", err);
       }
     }
   };
 
   const handleOrder = async () => {
-    if (!window.confirm("¿Estás seguro de que quieres realizar el pedido?")) return;
+    if (!window.confirm("정말로 주문하시겠습니까?")) return;
 
     const orderItems = cartData.cartItem.content.map((item) => ({
       productId: Number(item.productId),
@@ -83,14 +83,14 @@ export default function CartPage() {
       );
 
       if (response.ok) {
-        alert("¡Pedido realizado con éxito! Revisa tu correo electrónico 💌");
+        alert("주문 성공! 네이버 메일함을 확인하세요! 💌");
         navigate("/main");
       } else {
         const errorDetail = await response.text();
         if (import.meta.env.DEV) {
           console.error("서버 응답 에러:", errorDetail);
         }
-        alert("Error al procesar el pedido. Por favor, revisa los logs del servidor.");
+        alert("주문 실패! 서버 로그를 확인해주세요.");
       }
     } catch (err) {
       if (import.meta.env.DEV) {
@@ -101,11 +101,11 @@ export default function CartPage() {
     }
   };
 
-  if (loading) return <div className={styles.loading}>Cargando... 🌻</div>;
+  if (loading) return <div className={styles.loading}>로딩 중... 🌻</div>;
 
   return (
     <div className={styles.container}>
-      <h2>Mi Carrito 🛒</h2>
+      <h2>내 장바구니 🛒</h2>
 
       {cartData?.cartItem.content.length > 0 ? (
         <>
@@ -114,13 +114,13 @@ export default function CartPage() {
               <div key={item.cartItemId} className={styles.cart_item}>
                 <div className={styles.item_info}>
                   <h4>{item.title}</h4>
-                  <p>${item.price.toLocaleString()}</p>
+                  <p>{item.price.toLocaleString()}원</p>
                 </div>
                 <button
                   className={styles.delete_btn}
                   onClick={() => handleDelete(item.cartItemId)}
                 >
-                  Eliminar
+                  삭제
                 </button>
               </div>
             ))}
@@ -128,22 +128,22 @@ export default function CartPage() {
 
           <div className={styles.summary}>
             <h3>총 결제 금액: {cartData.totalCartPrice.toLocaleString()}원</h3>
-            <p>Total de productos: {cartData.totalCount}</p>
+            <p>총 상품 개수: {cartData.totalCount}개</p>
             <div className={styles.button_group}>
               <button className={styles.order_btn} onClick={handleOrder}>
-                Realizar Pedido
+                주문하기
               </button>
               <button
                 className={`${styles.order_btn} ${styles.back_btn}`}
                 onClick={() => navigate(-1)}
               >
-                Volver
+                뒤로가기
               </button>
             </div>
           </div>
         </>
       ) : (
-        <p className={styles.empty_msg}>¡Tu carrito está vacío! 🌻</p>
+        <p className={styles.empty_msg}>장바구니가 비어있어요! 🌻</p>
       )}
     </div>
   );

@@ -30,13 +30,13 @@ const LoginForm = ({ onSwitchMode }) => {
         body: JSON.stringify({ email, password }),
       });
 
-      if (!res.ok) throw new Error("Error en el inicio de sesión");
+      if (!res.ok) throw new Error("로그인 실패");
 
       const data = await res.json();
       localStorage.setItem("accessToken", data.accessToken);
       navigate("/main");
     } catch {
-      setError("Ha ocurrido un error durante el inicio de sesión.");
+      setError("로그인 중 오류가 발생했습니다.");
     }
   };
 
@@ -55,7 +55,7 @@ const LoginForm = ({ onSwitchMode }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit" name="Iniciar Sesión" />
+        <Button type="submit" name="로그인 하기" />
       </form>
       <AuthSwitcher isLogin={true} onSwitchMode={onSwitchMode} />
       <br />
