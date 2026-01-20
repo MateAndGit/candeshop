@@ -1,0 +1,97 @@
+.main_container {
+  background: #fff8e1;
+  min-height: 100vh;
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  min-height: 100vh;
+  padding: 20px 40px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+}
+
+.banner {
+  background: linear-gradient(to right, #ffc107, #ff9800);
+  padding: 40px;
+  border-radius: 30px;
+  color: white;
+  margin-top: 20px; /* Navbar와의 간격 */
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.banner h2 {
+  font-family: "Gaegu", cursive;
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.section_title {
+  margin-bottom: 15px;
+  color: #5d4037;
+}
+.product_grid {
+  display: grid;
+  /* 4개에서 3개로 변경 (1fr을 3번 반복) */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* 카드 사이 간격을 좀 더 넓히면 시원해 보입니다 */
+  padding: 20px 0;
+  max-width: 1000px; /* 중앙 정렬을 위해 최대 너비 설정 */
+  margin: 0 auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 30px 0 30px 0;
+}
+
+.pageBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  color: #666;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.activePage {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #333;
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background-color: #f8f8f8;
+  border-color: #ccc;
+  color: #333;
+}
+
+.pageBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  background-color: #fdfdfd;
+}

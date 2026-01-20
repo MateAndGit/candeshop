@@ -1,0 +1,93 @@
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fffdf7;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.cart_item {
+  display: flex;
+  justify-content: space-between; /* 정보는 왼쪽, 버튼은 오른쪽 */
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #f0e6d2;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.item_info {
+  flex: 1; /* 정보 영역이 최대한 공간을 차지하게 함 */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.item_info h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.item_info p {
+  margin: 0;
+  color: #666;
+}
+
+.delete_btn {
+  width: 80px; /* 버튼 크기 고정 */
+  height: 40px;
+  background-color: #ffeded;
+  color: #ff4d4d;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0; /* 버튼이 찌그러지지 않게 함 */
+  margin-left: 20px;
+  transition: all 0.2s ease;
+}
+
+.delete_btn:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+/* 요약 박스 주문하기 버튼도 너무 크지 않게 조절 */
+.order_btn {
+  width: 100%;
+  max-width: 300px; /* 너무 길어지지 않게 */
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #5a4a3a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* 오른쪽 정렬 */
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 2px dashed #f0e6d2;
+}
+
+.button_group {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  gap: 12px; /* 버튼 사이 간격 */
+  margin-top: 20px;
+}
+
+/* 뒤로가기 버튼만 색상을 바꾸고 싶을 때 추가 */
+.back_btn {
+  background-color: #f0f0f0 !important;
+  color: #333 !important;
+}
