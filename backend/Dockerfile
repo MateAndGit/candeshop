@@ -10,7 +10,7 @@ RUN chmod +x gradlew
 RUN ./gradlew clean bootJar -x test
 
 # 2단계: 실행 (JRE 21)
-FROM eclipse-temurin:21-jr-jammy
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 # 빌드된 jar 파일을 app.jar로 복사
